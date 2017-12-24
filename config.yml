@@ -1,0 +1,16 @@
+logging:
+  level: INFO
+  loggers:
+    org.trastle: INFO
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 22200
+  adminConnectors:
+    - type: http
+      port: 22201
+
+haverland:
+  username: ${HAVERLAND_USERNAME:-}
+  password: ${HAVERLAND_PASSWORD:-}

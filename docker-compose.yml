@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  heatertool:
+    image: trastle/heatertool
+    build: .
+    ports:
+      - 22200:22200
+    environment:
+      - HAVERLAND_USERNAME=username
+      - HAVERLAND_PASSWORD=password
