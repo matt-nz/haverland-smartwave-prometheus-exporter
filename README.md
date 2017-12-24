@@ -1,10 +1,15 @@
-# HeaterTool
+# Haverland Smartwave Prometheus Exporter
+
+[![Build Status](https://travis-ci.org/trastle/haverland-smartwave-prometheus-exporter.svg?branch=master)](https://travis-ci.org/trastle/haverland-smartwave-prometheus-exporter)
+
+Export the status of your Haverland Smartwave heaters as Prometheus metrics.
 
 ## Requirements
 
-* Java JDK8
+* JDK8
 * Maven 3
 * Docker
+* Docker-Compose
 
 ## Building and running the application locally
 
@@ -34,7 +39,13 @@
 	docker-compose up -d
 	```
 
-3. Bring it down
+3. Look at your metrics
+
+    ```
+    curl localhost:22200/metrics
+    ```
+
+4. Bring it down
 
     ```
     docker-compose stop
