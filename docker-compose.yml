@@ -2,7 +2,7 @@ version: '3'
 services:
 
   heatertool:
-    image: trastle/heatertool
+    image: trastle/haverland-smartwave-prometheus-exporter
     build: .
     ports:
       - 22200:22200
