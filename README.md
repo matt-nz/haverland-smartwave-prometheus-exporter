@@ -1,6 +1,7 @@
 # Haverland Smartwave Prometheus Exporter
 
 [![Build Status](https://travis-ci.org/trastle/haverland-smartwave-prometheus-exporter.svg?branch=master)](https://travis-ci.org/trastle/haverland-smartwave-prometheus-exporter)
+[![Docker Build](https://img.shields.io/docker/automated/trastle/haverland-smartwave-prometheus-exporter.svg)](https://hub.docker.com/r/trastle/haverland-smartwave-prometheus-exporter/)
 
 Export the status of your Haverland Smartwave heaters as Prometheus metrics.
 
