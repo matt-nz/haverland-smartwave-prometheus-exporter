@@ -3,16 +3,53 @@
 [![Build Status](https://travis-ci.org/trastle/haverland-smartwave-prometheus-exporter.svg?branch=master)](https://travis-ci.org/trastle/haverland-smartwave-prometheus-exporter)
 [![Docker Build](https://img.shields.io/docker/automated/trastle/haverland-smartwave-prometheus-exporter.svg)](https://hub.docker.com/r/trastle/haverland-smartwave-prometheus-exporter/)
 
-Export the status of your Haverland Smartwave heaters as Prometheus metrics.
+Export the status of your Haverland Smartwave Heaters as Prometheus metrics.
+
+## Usage
+
+### Usage requirements
+
+* Docker
+* Docker-Compose (optional)
+
+### Running the exporter
+
+1. Run the exporter...
+
+   **with the Docker CLI:**
+
+	```
+	docker run -p 127.0.0.1:22200:22200 \
+	   --env HAVERLAND_USERNAME=your_username \
+       --env HAVERLAND_PASSWORD=your_password \
+	   trastle/haverland-smartwave-prometheus-exporter
+	    
+	```
+   
+   **with Compose:**
     
-## Requirements
+   Add your credentials to ```docker-compose.yml```
+   
+   ```
+   docker-compose up -d
+   ```
+
+2. Look at your metrics
+
+    ```
+    curl localhost:22200/metrics
+    ```
+
+## Development
+
+### Devopment Requirements
 
 * JDK8
 * Maven 3
 * Docker
 * Docker-Compose
 
-## Building and running the application locally
+### Building and running the application locally
 
 1. To build the application
 
@@ -26,7 +63,7 @@ Export the status of your Haverland Smartwave heaters as Prometheus metrics.
 	java -jar target/HeaterTool-1.0-SNAPSHOT.jar server config.yml
 	```
 
-## Running the application in Docker
+### Building the Docker Image
 
 1. Build
 
@@ -34,21 +71,3 @@ Export the status of your Haverland Smartwave heaters as Prometheus metrics.
 	docker-compose build
 	```
 
-2. Run
-
-	```
-	docker-compose up -d
-	```
-
-3. Look at your metrics
-
-    ```
-    curl localhost:22200/metrics
-    ```
-
-4. Bring it down
-
-    ```
-    docker-compose stop
-    docker-compose rm
-    ```

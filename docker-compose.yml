@@ -1,11 +1,11 @@
 version: '3'
 services:
 
-  heatertool:
+  haverland-prometheus-exporter:
     image: trastle/haverland-smartwave-prometheus-exporter
     build: .
     ports:
       - 22200:22200
     environment:
-      - HAVERLAND_USERNAME=username
-      - HAVERLAND_PASSWORD=password
+      - HAVERLAND_USERNAME=your_username
+      - HAVERLAND_PASSWORD=your_password
