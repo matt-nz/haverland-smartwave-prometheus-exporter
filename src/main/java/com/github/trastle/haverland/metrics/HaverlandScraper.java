@@ -1,4 +1,4 @@
-package org.trastle.haverlandmetrics;
+package com.github.trastle.haverland.metrics;
 
 import com.github.trastle.haverlandsmartwaveclient.HaverlandSmartwaveClient;
 import com.github.trastle.haverlandsmartwaveclient.HaverlandSmartwaveDeviceClient;
@@ -15,18 +15,18 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by tastle on 22/11/2017.
+ * Scrape the Haverland REST API for metrics
  */
 public class HaverlandScraper implements Runnable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HaverlandScraper.class);
 
-    static final Counter successCounter =
-            Counter.build("heater_scrape_success_counter", "Number of successful scrapes since startup").create().register();
-    static final Counter failureCounter =
-            Counter.build("heater_scrape_failure_counter", "Number of failed scrapes since startup").create().register();
-    static final Counter totalCounter =
-            Counter.build("heater_scrape_total_counter", "Number of total scrapes since startup").create().register();
+    private static final Counter successCounter =
+            Counter.build("heater_scrape_success_counter", "Number of successful scrapes").create().register();
+    private static final Counter failureCounter =
+            Counter.build("heater_scrape_failure_counter", "Number of failed scrapes").create().register();
+    private static final Counter totalCounter =
+            Counter.build("heater_scrape_total_counter", "Number of total scrapes").create().register();
 
     private static final String CACHE_KEY_DEVICE_CLIENT = "CACHE_KEY_DEVICE_CLIENT";
     private static final String CACHE_KEY_HEATER_TOOL_DEVICE = "CACHE_KEY_HEATER_TOOL_DEVICE";
@@ -69,7 +69,7 @@ public class HaverlandScraper implements Runnable {
             final AuthResponse authResponse = authClient.authenticate(username, password);
             LOGGER.info("Fetched AuthResponse: " + authResponse);
             deviceClient = authClient.getServiceProxy(authResponse);
-            cache.put("CACHE_KEY_DEVICE_CLIENT", deviceClient);
+            cache.put(CACHE_KEY_DEVICE_CLIENT, deviceClient);
         }
 
         return deviceClient;
@@ -82,7 +82,7 @@ public class HaverlandScraper implements Runnable {
             final HaverlandSmartwaveDeviceClient client = getDeviceClient();
             device = client.getDevices().getDevices().get(0);
             LOGGER.info("Fetched Device: " + device);
-            cache.put("CACHE_KEY_HEATER_TOOL_DEVICE", device);
+            cache.put(CACHE_KEY_HEATER_TOOL_DEVICE, device);
         }
 
         return device;
@@ -97,9 +97,9 @@ public class HaverlandScraper implements Runnable {
             final NodesResponse nodesResponse = client.getNodes(device.getDeviceId());
             nodes = nodesResponse.getNodes();
             LOGGER.info("Fetched Nodes: " + nodes);
-            cache.put("CACHE_KEY_HEATER_TOOL_NODES", nodes);
+            cache.put(CACHE_KEY_HEATER_TOOL_NODES, nodes);
 
-            for (Node node : getNodes()) {
+            for (Node node : nodes) {
                 this.nodeMetrics.put(node, new NodeMetrics(device, node));
             }
         }

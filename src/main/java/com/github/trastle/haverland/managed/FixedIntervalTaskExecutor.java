@@ -1,4 +1,4 @@
-package org.trastle.managed;
+package com.github.trastle.haverland.managed;
 
 import io.dropwizard.lifecycle.Managed;
 import io.dropwizard.util.Duration;
@@ -8,16 +8,19 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class HaverlandScraperTaskScheduler implements Managed {
+/**
+ * Boilerplate fixed interval executor.
+ */
+public class FixedIntervalTaskExecutor implements Managed {
 
     private final Duration interval;
-    private Runnable task;
+    private final Runnable task;
 
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     private ScheduledFuture<?> scheduledFuture;
 
-    public HaverlandScraperTaskScheduler(Runnable task, Duration interval) {
+    public FixedIntervalTaskExecutor(Runnable task, Duration interval) {
         this.interval = interval;
         this.task = task;
     }

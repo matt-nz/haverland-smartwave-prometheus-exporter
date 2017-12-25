@@ -1,6 +1,8 @@
-package org.trastle.haverlandmetrics;
+package com.github.trastle.haverland.metrics;
 
-import com.github.trastle.haverlandsmartwaveclient.model.*;
+import com.github.trastle.haverlandsmartwaveclient.model.Device;
+import com.github.trastle.haverlandsmartwaveclient.model.HeaterStatus;
+import com.github.trastle.haverlandsmartwaveclient.model.Node;
 import io.prometheus.client.Gauge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +16,7 @@ public class NodeMetrics {
 
     private static final Gauge currentTempGauge =
             Gauge.build("heater_temperature_current", "Current heater temperature")
-            .labelNames("device", "node").create().register();
+                    .labelNames("device", "node").create().register();
 
     private static final Gauge targetTempGauge =
             Gauge.build("heater_temperature_target", "Target heater temperature")

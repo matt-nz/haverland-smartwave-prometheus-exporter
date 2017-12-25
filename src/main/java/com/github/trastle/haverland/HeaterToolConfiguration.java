@@ -1,4 +1,4 @@
-package org.trastle;
+package com.github.trastle.haverland;
 
 import io.dropwizard.Configuration;
 import org.hibernate.validator.constraints.NotEmpty;

@@ -1,6 +1,7 @@
-package org.trastle;
+package com.github.trastle.haverland;
 
-import com.github.trastle.haverlandsmartwaveclient.HaverlandSmartwaveClient;
+import com.github.trastle.haverland.managed.FixedIntervalTaskExecutor;
+import com.github.trastle.haverland.metrics.HaverlandScraper;
 import io.dropwizard.Application;
 import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
 import io.dropwizard.configuration.SubstitutingSourceProvider;
@@ -11,8 +12,6 @@ import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.exporter.MetricsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.trastle.haverlandmetrics.HaverlandScraper;
-import org.trastle.managed.HaverlandScraperTaskScheduler;
 
 public class HeaterToolApplication extends Application<HeaterToolConfiguration> {
 
@@ -47,8 +46,8 @@ public class HeaterToolApplication extends Application<HeaterToolConfiguration> 
                 configuration.getHaverland().getUsername(),
                 configuration.getHaverland().getPassword());
 
-        HaverlandScraperTaskScheduler hcts = new HaverlandScraperTaskScheduler(task, Duration.minutes(1L));
-        environment.lifecycle().manage(hcts);
+        FixedIntervalTaskExecutor taskScheduler = new FixedIntervalTaskExecutor(task, Duration.minutes(1L));
+        environment.lifecycle().manage(taskScheduler);
 
         environment.servlets()
                 .addServlet("heaterMetrics", new MetricsServlet(CollectorRegistry.defaultRegistry))
