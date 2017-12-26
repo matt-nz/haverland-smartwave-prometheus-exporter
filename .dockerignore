@@ -1,0 +1,7 @@
+target
+dependency-reduced-pom.xml
+.idea
+Dockerfile
+docker-compose.yml
+LICENCE.txt
+README.md

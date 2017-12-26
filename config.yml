@@ -1,7 +1,7 @@
 logging:
   level: INFO
   loggers:
-    org.trastle: INFO
+    com.github.trastle: INFO
 
 server:
   applicationConnectors:
