@@ -2,10 +2,9 @@ FROM maven:3-jdk-8 as mvnbuild
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
 COPY pom.xml .
-RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml dependency:resolve-plugins
-RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml dependency:resolve
-COPY src .
-RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml package
+RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml dependency:resolve-plugins dependency:resolve clean package
+COPY . .
+RUN mvn -B -s /usr/share/maven/ref/settings-docker.xml clean package
 
 FROM openjdk:8-jre-alpine
 RUN  mkdir -p /opt/heater-tool

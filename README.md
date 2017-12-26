@@ -20,9 +20,9 @@ Export the status of your Haverland Smartwave Heaters as Prometheus metrics.
 
 	```
 	docker run -p 127.0.0.1:22200:22200 \
-	   --env HAVERLAND_USERNAME=your_username \
+       --env HAVERLAND_USERNAME=your_username \
        --env HAVERLAND_PASSWORD=your_password \
-	   trastle/haverland-smartwave-prometheus-exporter
+       trastle/haverland-smartwave-prometheus-exporter
 	    
 	```
    
